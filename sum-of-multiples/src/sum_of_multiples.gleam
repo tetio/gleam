@@ -1,8 +1,8 @@
-import gleam/set
+import gleam/int
 import gleam/list
+
 pub fn sum(factors factors: List(Int), limit limit: Int) -> Int {
-  list.map(factors, fn(e) {list.range(e, limit-1) |> list.filter(fn(t) {t >= e}) |> list.filter(fn(t) {t % e == 0})})
-    |> list.flatten
-    |> set.from_list
-    |> set.fold(0, fn(acc, e) {acc + e})
+  list.range(0, limit - 1)
+  |> list.filter(fn(n) { list.any(factors, fn(f) { f > 0 && n % f == 0 }) })
+  |> int.sum
 }
